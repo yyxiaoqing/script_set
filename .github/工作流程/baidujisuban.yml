@@ -6,8 +6,6 @@ on:
      - cron: '*/30 * * * *'
   watch:
     types: started
-  repository_dispatch:
-    types: _
 
 jobs:
   build:
