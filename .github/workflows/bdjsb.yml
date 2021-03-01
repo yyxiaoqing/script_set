@@ -3,19 +3,16 @@ name: 百度极速版
 on:
   workflow_dispatch:
   schedule:
-     - cron: '*/30 * * * *'
+    - cron: '*/30 * * * *'
   watch:
-    types: started
+    types: [started]
 
 jobs:
   build:
     runs-on: ubuntu-latest
     if: github.event.repository.owner.id == github.event.sender.id
-    env:
-        TZ: Asia/shanghai
     steps:
-      - name: Checkout
-        run: |
+      - uses: actions/checkout@v1
       - name: Use Node.js 12.x
         uses: actions/setup-node@v1
         with:
@@ -23,8 +20,7 @@ jobs:
       - name: npm install
         run: |
           npm install
-      - name: '运行 【百度极速版】'
-        if: env.BAIDU_COOKIE
+      - name: '运行【百度极速版】'
         run: |
           node ./Task/baidu_speed.js
         env:
