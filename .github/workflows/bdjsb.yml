@@ -12,7 +12,6 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.repository.owner.id == github.event.sender.id
     env:
-        BAIDU_COOKIE: ${{ secrets.BAIDU_COOKIE }}
         TZ: Asia/shanghai
     steps:
       - name: Checkout
