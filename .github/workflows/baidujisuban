@@ -1,0 +1,40 @@
+name: 百度极速版
+
+on:
+  workflow_dispatch:
+  schedule:
+     - cron: '*/5 * * * *'
+  watch:
+    types: started
+  repository_dispatch:
+    types: _
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    if: github.event.repository.owner.id == github.event.sender.id
+    env:
+        BAIDU_COOKIE: ${{ secrets.BAIDU_COOKIE }}
+        TZ: Asia/shanghai
+    steps:
+      - name: Checkout
+        run: |
+          git clone https://github.com/Sunert/Scripts ~/Scripts
+      - name: Use Node.js 12.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      - name: npm install
+        run: |
+          cd ~/Scripts
+          npm install
+      - name: '运行 【百度极速版】'
+        if: env.BAIDU_COOKIE
+        run: |
+          cd ~/Scripts
+          node Task/baidu_speed.js
+        env:
+          BAIDU_TASK: ${{ secrets.BAIDU_TASK }}
+          BAIDU_CASH: ${{ secrets.BAIDU_CASH }}
+          TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+          TG_USER_ID: ${{ secrets.TG_USER_ID }}
