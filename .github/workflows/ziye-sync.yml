@@ -25,7 +25,7 @@ jobs:
         uses: repo-sync/github-sync@v2
         if: env.PAT
         with:
-          source_repo: "https://github.com/6Svip120apk69/gitee_q8qsTAUA_cThxc1RBVUE.git"
+          source_repo: "https://github.com/JunzhouLiu/BILIBILI-HELPER-PRE.git"
           source_branch: "main"
-          destination_branch: "ziye"
+          destination_branch: "bilibili"
           github_token: ${{ secrets.PAT }}
